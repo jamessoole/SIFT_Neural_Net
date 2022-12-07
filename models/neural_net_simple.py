@@ -24,28 +24,16 @@ class NeuralNet(torch.nn.Module):
             nn.Linear(self.h,self.h),
             torch.nn.ReLU(),
             nn.Linear(self.h,out_size),
-            # softmax need if run more?
+            # no softmax
         ]
         self.net = torch.nn.Sequential(*self.layers)
-
-#         self.fc1 = nn.Linear(in_size,self.h)
-#         self.fc2 = nn.Linear(self.h,self.h)
-#         self.fc3 = nn.Linear(self.h,out_size)
         
         self.loss_fn = nn.CrossEntropyLoss()
         self.optim = torch.optim.SGD(self.net.parameters(), lr = lrate,nesterov = True, momentum = 0.9, weight_decay = 0.001)
-        # self.optim = torch.optim.Adam(self.net.parameters(), lr = lrate)
 
 
     def forward(self, x: np.ndarray) -> np.ndarray:
-        x = self.net(x)
-        
-        # x = self.layers[0](x)
-#         x = self.layers[1](x)
-#         x = self.layers[2](x)
-#         x = self.layers[3](x)
-
-        return x
+        return self.net(x)
 
 
     def backward(self, x,y):

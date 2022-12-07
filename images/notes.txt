@@ -1,0 +1,1 @@
+all 40 epochs, TSNE(n_components=2, verbose=1, perplexity=15, n_iter=300)
